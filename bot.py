@@ -4,7 +4,7 @@ from telegram import Update, BotCommand
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 # Get the token from environment variable
-TOKEN = "8071417612:AAGQJWsw4jb_brta2aeUnBYDzjSpDJVeHq4"
+TOKEN = "8199719416:AAGxiXB9ex6yEfbjYJnGahSPOymiduVMVYQ"
 
 # --- Predefined random messages ---
 MESSAGES = [
