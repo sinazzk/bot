@@ -1,10 +1,12 @@
 import random
-import asyncio
+import os
 from telegram import Update, BotCommand
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-# ✅ Paste your new token here (keep it secret!)
-TOKEN = "8071417612:AAGQJWsw4jb_brta2aeUnBYDzjSpDJVeHq4"
+# Get the token from environment variable
+TOKEN = os.environ.get("BOT_TOKEN")
+if not TOKEN:
+    raise ValueError("Please set the BOT_TOKEN environment variable!")
 
 # --- Predefined random messages ---
 MESSAGES = [
@@ -43,8 +45,9 @@ async def send_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if cmd in LINKS:
         await update.message.reply_text(LINKS[cmd])
 
-# --- Main function ---
-async def main():
+# --- Main bot ---
+def main():
+    # Build the application
     app = ApplicationBuilder().token(TOKEN).build()
 
     # Register command handlers
@@ -53,7 +56,7 @@ async def main():
         app.add_handler(CommandHandler(key, send_link))
 
     # Register commands with Telegram so they show in `/` menu
-    await app.bot.set_my_commands([
+    app.bot.set_my_commands([
         BotCommand("random", "Send a random message"),
         BotCommand("1", "Send Link 1"),
         BotCommand("2", "Send Link 2"),
@@ -61,8 +64,9 @@ async def main():
     ])
 
     print("Bot is running...")
-    await app.run_polling()
+    # Run polling directly (no asyncio.run)
+    app.run_polling()
 
-# Run the bot
+# Run bot
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
