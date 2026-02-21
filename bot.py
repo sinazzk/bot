@@ -54,12 +54,12 @@ def main():
         app.add_handler(CommandHandler(key, send_link))
 
     # Register commands with Telegram so they show in `/` menu
-    app.bot.set_my_commands([
-        BotCommand("random", "Send a random message"),
-        BotCommand("1", "Send Link 1"),
-        BotCommand("2", "Send Link 2"),
-        BotCommand("3", "Send Link 3")
-    ])
+    # app.bot.set_my_commands([
+    #     BotCommand("random", "Send a random message"),
+    #     BotCommand("1", "Send Link 1"),
+    #     BotCommand("2", "Send Link 2"),
+    #     BotCommand("3", "Send Link 3")
+    # ])
 
     print("Bot is running...")
     # Run polling directly (no asyncio.run)
